@@ -11,7 +11,8 @@ String Matching done using fuzzywuzzy adopted for pd.DataFrame
 
 ## Method and use cases
 
-It uses a slightly optimized version of [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance#:~:text=Informally%2C%20the%20Levenshtein%20distance%20between,considered%20this%20distance%20in%201965.) with sorting and weighting performed. As a result, it distinguishes between "new Iphone" and "Iphone new" (unlike a plain-vanilla implementation of the distance). It's a no-frills implementation of a fairly computationally expensive method (it's average time complexity is O(NM), where N and M are lengths of respective strings) but, at the same, is a widely accepted method for fuzzy matching.
+It uses a slightly optimized version of [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance#:~:text=Informally%2C%20the%20Levenshtein%20distance%20between,considered%20this%20distance%20in%201965.) with sorting and weighting performed. As a result, it distinguishes between "new Iphone" and "Iphone new" (unlike a plain-vanilla implementation of the distance). It's a no-frills implementation of a fairly computationally expensive method (it's average time complexity is O(NM), where N and M are lengths of respective strings) but, at the same, is a widely accepted method for fuzzy matching.  
+
 That said, it works fairly well on strings up to 10-12 words where words can be placed in a random order. It is fairly common for item descriptions.
 
 ## Initialization:
