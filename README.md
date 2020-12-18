@@ -47,3 +47,9 @@ If there are 90 values in a column but four are the same, you will get a datafra
 clean_column(self, col_name)
 ```
 Takes a column `col_name`, applies `lower()` to it, removes NLTK's stopwords and adds a new column *col_name_clean* to the existing dataframe.
+
+
+## Provided files
+
+`String_Matcher.py` -- core code
+`String_Matcher_int.ipynb` -- Jupyter Workbook with a working example
