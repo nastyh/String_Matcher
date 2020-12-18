@@ -16,19 +16,17 @@ class String_Matcher():
     However, light cleaning is possible via clean_column()
 
     How to use:
-    sm = String_Matcher(filepath)
+    sm = String_Matcher(df)
     l = sm.created_matched_list('item_title', 'ipod') will create a list with the top 10 matches for the query 'ipod' from the column df['item_title'] 
     matched_df = sm.create_matched_df('item_title') will create a dataframe with two columns. The first column are item titles, the second column are the top 10
     matches selected from the same column. 
     """
 
-    def __init__(self, filepath):
+    def __init__(self, df):
         """
-        filepath: string with a path to the folder containing .txt files to be processed
+        df: pd.DataFrame
         """
-        l = [pd.read_csv(filename, header = None, sep = '\t', names = ['item_id', 'site', 'category_id', 'item_title'])\
-            for filename in glob.glob(filepath + '/*.txt')]
-        self.df = pd.concat(l, axis = 0)
+        self.df = df
 
 
     def clean_column(self, col_name):
@@ -67,10 +65,7 @@ class String_Matcher():
         """
         Returns pd.DataFrame with two columns: 'item_title' and 'matches.'
         For every item_title, there are 10 matches. IMPORTANT: it considers only unique values.
-        If a dataframe consists of 10 titles but two of them are similar, it will return 90 (9 * 10) rows. This happens to the mp3 dataset
-        One caveat: it looks across all the files (because they're concatenated into one dataframe) that might or might not
-        be a good idea depending on the context (for files containing info about different categories, it's probably bad).
-        But building a logic with separate files was taking time.
+        If a dataframe consists of 10 titles but two of them are similar, it will return 90 (9 * 10) rows.
         The provided score takes care of punctuation and word order.
 
         col_name: string
@@ -83,7 +78,7 @@ class String_Matcher():
             curr_res = process.extract(v, choices, limit = topN, scorer = fuzz.token_sort_ratio)
             for ix in range(len(curr_res)):
                 d[v].append(curr_res[ix][0])
-        df_from_d = pd.DataFrame.from_dict(d, orient = 'index', columns = ['Top1', 'Top2', 'Top3', 'Top4', 'Top5','Top6', 'Top7', 'Top8', 'Top9', 'Top10'])
+        df_from_d = pd.DataFrame.from_dict(d, orient = 'index')
         df_from_d_stacked = df_from_d.stack().reset_index()
         df_from_d_stacked.drop('level_1', axis = 1, inplace = True)
         df_from_d_stacked.rename(columns = {"level_0": "item_id", 0: "matches"}, inplace = True)
