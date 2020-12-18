@@ -51,5 +51,6 @@ Takes a column `col_name`, applies `lower()` to it, removes NLTK's stopwords and
 
 ## Provided files
 
-`String_Matcher.py` -- core code
+`String_Matcher.py` -- core code  
+
 `String_Matcher_int.ipynb` -- Jupyter Workbook with a working example
