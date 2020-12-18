@@ -33,7 +33,7 @@ Returns a list with `topN` best matches for `str_to_match` from column `col_name
 
 
 ```
-create_matched_df(self, col_name, topN)
+create_matched_df(self, col_name, topN = 10)
 ```
 Returns a `pd.DataFrame` with two columns.
 First column, *item_id*, contains values from `col_name`. Second column, *matches*, contains the best `topN` matches for this value from the same column. It doesn't include the value itself to the list of candidates, nor does it consider duplicates. 
